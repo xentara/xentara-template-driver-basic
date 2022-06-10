@@ -237,11 +237,11 @@ auto TemplateOutput::writeHandle(const model::Attribute &attribute) noexcept -> 
 	return data::WriteHandle::Error::Unknown;
 }
 
-auto TemplateOutput::prepare() -> void
+auto TemplateOutput::realize() -> void
 {
-	// Prepare the state objects
-	_readState.prepare();
-	_writeState.prepare();
+	// Realize the state objects
+	_readState.realize();
+	_writeState.realize();
 }
 
 } // namespace xentara::plugins::templateDriver

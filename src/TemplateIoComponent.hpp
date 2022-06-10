@@ -88,8 +88,6 @@ public:
 
 	auto cleanup() -> void final;
 
-	// TODO: add postPrepare() and preCleanup() functions as necessary
-
 protected:
 	auto loadConfig(const ConfigIntializer &initializer,
 		utils::json::decoder::Object &jsonObject,

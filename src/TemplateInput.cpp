@@ -172,10 +172,10 @@ auto TemplateInput::readHandle(const model::Attribute &attribute) const noexcept
 	return data::ReadHandle::Error::Unknown;
 }
 
-auto TemplateInput::prepare() -> void
+auto TemplateInput::realize() -> void
 {
-	// Prepare the state object
-	_state.prepare();
+	// Realize the state object
+	_state.realize();
 }
 
 } // namespace xentara::plugins::templateDriver
