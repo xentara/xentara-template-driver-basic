@@ -1,7 +1,6 @@
 // Copyright (c) embedded ocean GmbH
 #pragma once
 
-#include "TemplateIoComponent.hpp"
 #include "InputState.hpp"
 #include "OutputState.hpp"
 #include "ReadTask.hpp"
