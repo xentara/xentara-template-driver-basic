@@ -1,7 +1,7 @@
 // Copyright (c) embedded ocean GmbH
 #pragma once
 
-#include "InputState.hpp"
+#include "ReadState.hpp"
 #include "ReadTask.hpp"
 
 #include <xentara/io/Io.hpp>
@@ -116,7 +116,7 @@ private:
 
 	// The state
 	// TODO: use the correct value type
-	InputState<double> _state;
+	ReadState<double> _state;
 
 	// The "read" task
 	ReadTask<TemplateInput> _readTask { *this };
