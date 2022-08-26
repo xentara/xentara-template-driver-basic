@@ -22,6 +22,7 @@ add_library(
 	"src/Plugin.cpp"
 	"src/Plugin.hpp"
 	"src/ReadTask.hpp"
+	"src/SingleValueQueue.hpp"
 	"src/TemplateInput.cpp"
 	"src/TemplateInput.hpp"
 	"src/TemplateIoComponent.cpp"
