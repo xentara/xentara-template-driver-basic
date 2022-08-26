@@ -4,11 +4,9 @@
 #include "Attributes.hpp"
 
 #include <xentara/data/ReadHandle.hpp>
-#include <xentara/data/WriteHandle.hpp>
 #include <xentara/memory/memoryResources.hpp>
 #include <xentara/memory/ObjectBlock.hpp>
 #include <xentara/process/Event.hpp>
-#include <xentara/utils/threads/AtomicOptional.hpp>
 
 #include <chrono>
 #include <concepts>
