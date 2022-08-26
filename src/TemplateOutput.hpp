@@ -136,7 +136,6 @@ private:
 	// TODO: use the correct value type
 	InputState<double> _readState;
 	// The output state
-	// TODO: use the correct value type
 	OutputState _writeState;
 
 	// The queue for the pending output value
