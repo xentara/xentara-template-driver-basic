@@ -12,7 +12,6 @@
 #include <functional>
 #include <string_view>
 
-// TODO: rename namespace
 namespace xentara::plugins::templateDriver
 {
 
@@ -20,63 +19,71 @@ using namespace std::literals;
 
 class TemplateIoComponent;
 
-// A class representing a specific type of input.
-// TODO: rename this class to something more descriptive
+/// @brief A class representing a specific type of input.
+/// @todo rename this class to something more descriptive
 class TemplateInput final : public io::Io, public plugin::EnableSharedFromThis<TemplateInput>
 {
 private:
-	// A structure used to store the class specific attributes within an element's configuration
+	/// @brief A structure used to store the class specific attributes within an element's configuration
 	struct Config final
 	{
-		// TODO: Add custom config attributes
+		/// @todo Add custom config attributes
 	};
 	
 public:
-	// The class object containing meta-information about this element type
+	/// @brief The class object containing meta-information about this element type
 	class Class final : public io::IoClass
 	{
 	public:
-		// Gets the global object
+		/// @brief Gets the global object
 		static auto instance() -> Class&
 		{
 			return _instance;
 		}
 
-	    // Returns the array handle for the class specific attributes within an element's configuration
+	    /// @brief Returns the array handle for the class specific attributes within an element's configuration
 	    auto configHandle() const -> const auto &
         {
             return _configHandle;
         }
 
+		/// @name Virtual Overrides for io::IoClass
+		/// @{
+
 		auto name() const -> std::u16string_view final
 		{
-			// TODO: change class name
+			/// @todo change class name
 			return u"TemplateInput"sv;
 		}
 	
 		auto uuid() const -> utils::core::Uuid final
 		{
-			// TODO: assign a unique UUID
+			/// @todo assign a unique UUID
 			return "cccccccc-cccc-cccc-cccc-cccccccccccc"_uuid;
 		}
 
+		/// @}
+
 	private:
-	    // The array handle for the class specific attributes within an element's configuration
+	    /// @brief The array handle for the class specific attributes within an element's configuration
 		memory::Array::ObjectHandle<Config> _configHandle { config().appendObject<Config>() };
 
-		// The global object that represents the class
+		/// @brief The global object that represents the class
 		static Class _instance;
 	};
 
-	// This constructor attaches the input to its I/O component
+	/// @brief This constructor attaches the input to its I/O component
 	TemplateInput(std::reference_wrapper<TemplateIoComponent> ioComponent) :
 		_ioComponent(ioComponent)
 	{
 	}
-	
-	auto dataType() const -> const data::DataType &;
 
-	auto directions() const -> io::Directions;
+	/// @name Virtual Overrides for io::Io
+	/// @{
+	
+	auto dataType() const -> const data::DataType & final;
+
+	auto directions() const -> io::Directions final;
 
 	auto resolveAttribute(std::u16string_view name) -> const model::Attribute * final;
 	
@@ -88,37 +95,47 @@ public:
 
 	auto realize() -> void final;
 
-	// A Xentara attribute containing the current value. This is a member of this class rather than
-	// of the attributes namespace, because the access flags and type may differ from class to class
+	/// @}
+
+	/// @brief A Xentara attribute containing the current value.
+	/// @note This is a member of this class rather than of the attributes namespace, because the access flags
+	/// and type may differ from class to class
 	static const model::Attribute kValueAttribute;
 
 protected:
+	/// @name Virtual Overrides for io::Io
+	/// @{
+
 	auto loadConfig(const ConfigIntializer &initializer,
 		utils::json::decoder::Object &jsonObject,
 		config::Resolver &resolver,
 		const FallbackConfigHandler &fallbackHandler) -> void final;
 
+	/// @}
+
 private:
-	// The read task needs access to out private member functions
+	/// @brief The read task needs access to out private member functions
 	friend class ReadTask<TemplateInput>;
 
-	// This function is called by the "read" task. It attempts to read the value if the I/O component is up.
+	/// @brief This function is called by the "read" task.
+	///
+	/// This function attempts to read the value if the I/O component is up.
 	auto performReadTask(const process::ExecutionContext &context) -> void;
-	// Attempts to read the data from the I/O component and updates the state accordingly.
+	/// @brief Attempts to read the data from the I/O component and updates the state accordingly.
 	auto read(std::chrono::system_clock::time_point timeStamp) -> void;
 
-	// Invalidates any read data
+	/// @brief Invalidates any read data
 	auto invalidateData(std::chrono::system_clock::time_point timeStamp) -> void;
 
-	// The I/O component this input belongs to
-	// TODO: give this a more descriptive name, e.g. "_device"
+	/// @brief The I/O component this input belongs to
+	/// @todo give this a more descriptive name, e.g. "_device"
 	std::reference_wrapper<TemplateIoComponent> _ioComponent;
 
-	// The state
-	// TODO: use the correct value type
+	/// @brief The state
+	/// @todo use the correct value type
 	ReadState<double> _state;
 
-	// The "read" task
+	/// @brief The "read" task
 	ReadTask<TemplateInput> _readTask { *this };
 };
 

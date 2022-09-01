@@ -7,19 +7,21 @@
 #include <chrono>
 #include <functional>
 
-// TODO: rename namespace
 namespace xentara::plugins::templateDriver
 {
 
-// This class providing callbacks for the Xentara scheduler for the "read" task of I/O points
+/// @brief This class providing callbacks for the Xentara scheduler for the "read" task of I/O points
 template <typename Target>
 class WriteTask final : public process::Task
 {
 public:
-	// This constuctor attached the task to its target
+	/// @brief This constuctor attached the task to its target
 	WriteTask(std::reference_wrapper<Target> target) : _target(target)
 	{
 	}
+
+	/// @name Virtual Overrides for process::Task
+	/// @{
 
 	auto stages() const -> Stages final
 	{
@@ -31,9 +33,11 @@ public:
 	auto preOperational(const process::ExecutionContext &context) -> Status final;
 
 	auto operational(const process::ExecutionContext &context) -> void final;
+		
+	/// @}
 
 private:
-	// A reference to the target element
+	/// @brief A reference to the target element
 	std::reference_wrapper<Target> _target;
 };
 

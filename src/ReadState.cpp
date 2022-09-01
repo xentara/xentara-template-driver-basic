@@ -136,7 +136,8 @@ auto ReadState<DataType>::update(std::chrono::system_clock::time_point timeStamp
 	}
 }
 
-// TODO: add template instantiations for other supported types
+/// @class xentara::plugins::templateDriver::ReadState
+/// @todo add template instantiations for other supported types
 template class ReadState<double>;
 
 } // namespace xentara::plugins::templateDriver

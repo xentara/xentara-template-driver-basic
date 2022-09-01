@@ -31,20 +31,20 @@ auto TemplateIoComponent::loadConfig(const ConfigIntializer &initializer,
 	// Go through all the members of the JSON object that represents this object
 	for (auto && [name, value] : jsonObject)
     {
-		// TODO: load configuration parameters
+		/// @todo load configuration parameters
 		if (name == u8"TODO"sv)
 		{
-			// TODO: parse the value correctly
+			/// @todo parse the value correctly
 			auto todo = value.asNumber<std::uint64_t>();
 
-			// TODO: check that the value is valid
+			/// @todo check that the value is valid
 			if (!"TODO")
 			{
-				// TODO: use an error message that tells the user exactly what is wrong
+				/// @todo use an error message that tells the user exactly what is wrong
 				utils::json::decoder::throwWithLocation(value, std::runtime_error("TODO is wrong with TODO parameter of template I/O component"));
 			}
 
-			// TODO: set the appropriate member variables, and update configAttributes accordingly (if necessary) 
+			/// @todo set the appropriate member variables, and update configAttributes accordingly (if necessary) 
 		}
 		else
 		{
@@ -54,10 +54,10 @@ auto TemplateIoComponent::loadConfig(const ConfigIntializer &initializer,
 		}
     }
 
-	// TODO: perform consistency and completeness checks
+	/// @todo perform consistency and completeness checks
 	if (!"TODO")
 	{
-		// TODO: use an error message that tells the user exactly what is wrong
+		/// @todo use an error message that tells the user exactly what is wrong
 		utils::json::decoder::throwWithLocation(jsonObject, std::runtime_error("TODO is wrong with template I/O component"));
 	}
 }
@@ -74,20 +74,20 @@ auto TemplateIoComponent::createIo(const io::IoClass &ioClass, plugin::SharedFac
 		return factory.makeShared<TemplateOutput>(*this);
 	}
 
-	// TODO: add any other supported I/O point types
+	/// @todo add any other supported I/O point types
 
 	return nullptr;
 }
 
 auto TemplateIoComponent::resolveAttribute(std::u16string_view name) -> const model::Attribute *
 {
-	// TODO: resolve any attributes this class supports using model::Attribute::resolve
+	/// @todo resolve any attributes this class supports using model::Attribute::resolve
 	return nullptr;
 }
 
 auto TemplateIoComponent::readHandle(const model::Attribute &attribute) const noexcept -> data::ReadHandle
 {
-	// TODO create read handles for any attributes this class supports
+	/// @todo create read handles for any attributes this class supports
 
 	// Nothing found
 	return data::ReadHandle::Error::Unknown;
@@ -95,12 +95,12 @@ auto TemplateIoComponent::readHandle(const model::Attribute &attribute) const no
 
 auto TemplateIoComponent::prepare() -> void
 {
-	// TODO: open the handle for the I/O device
+	/// @todo open the handle for the I/O device
 }
 
 auto TemplateIoComponent::cleanup() -> void
 {
-	// TODO: close the handle to the I/O device
+	/// @todo close the handle to the I/O device
 }
 
 } // namespace xentara::plugins::templateDriver
