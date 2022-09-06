@@ -82,12 +82,13 @@ auto TemplateIoComponent::createIo(const io::IoClass &ioClass, plugin::SharedFac
 auto TemplateIoComponent::resolveAttribute(std::u16string_view name) -> const model::Attribute *
 {
 	/// @todo resolve any attributes this class supports using model::Attribute::resolve
+
 	return nullptr;
 }
 
 auto TemplateIoComponent::readHandle(const model::Attribute &attribute) const noexcept -> data::ReadHandle
 {
-	/// @todo create read handles for any attributes this class supports
+	/// @todo create read handles for any readable attributes this class supports
 
 	// Nothing found
 	return data::ReadHandle::Error::Unknown;
