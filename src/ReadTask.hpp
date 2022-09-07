@@ -66,7 +66,6 @@ auto ReadTask<Target>::preOperational(const process::ExecutionContext &context) 
 template <typename Target>
 auto ReadTask<Target>::operational(const process::ExecutionContext &context) -> void
 {
-	// read the value
 	_target.get().performReadTask(context);
 }
 
