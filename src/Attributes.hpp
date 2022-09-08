@@ -17,9 +17,6 @@ extern const model::Attribute kError;
 /// @brief A Xentara attribute containing a write error code for an I/O point
 extern const model::Attribute kWriteError;
 
-/// @brief A Xentara attribute containing an error code for an I/O component
-extern const model::Attribute kDeviceError;
-
 /// @namespace xentara::plugins::templateDriver::attributes
 /// @todo add any additional attributes supplied by the individual elements
 
