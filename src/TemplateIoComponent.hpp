@@ -48,10 +48,10 @@ public:
 		/// @name Virtual Overrides for io::ComponentClass
 		/// @{
 
-		auto name() const -> std::u16string_view final
+		auto name() const -> std::string_view final
 		{
 			/// @todo change class name
-			return u"TemplateIoComponent"sv;
+			return "TemplateIoComponent"sv;
 		}
 	
 		auto uuid() const -> utils::core::Uuid final
@@ -87,7 +87,7 @@ public:
 
 	auto createIo(const io::IoClass &ioClass, plugin::SharedFactory<io::Io> &factory) -> std::shared_ptr<io::Io> final;
 
-	auto resolveAttribute(std::u16string_view name) -> const model::Attribute * final;
+	auto resolveAttribute(std::string_view name) -> const model::Attribute * final;
 
 	auto readHandle(const model::Attribute &attribute) const noexcept -> data::ReadHandle final;
 

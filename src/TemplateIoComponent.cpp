@@ -32,7 +32,7 @@ auto TemplateIoComponent::loadConfig(const ConfigIntializer &initializer,
 	for (auto && [name, value] : jsonObject)
     {
 		/// @todo load configuration parameters
-		if (name == u8"TODO"sv)
+		if (name == "TODO"sv)
 		{
 			/// @todo parse the value correctly
 			auto todo = value.asNumber<std::uint64_t>();
@@ -79,7 +79,7 @@ auto TemplateIoComponent::createIo(const io::IoClass &ioClass, plugin::SharedFac
 	return nullptr;
 }
 
-auto TemplateIoComponent::resolveAttribute(std::u16string_view name) -> const model::Attribute *
+auto TemplateIoComponent::resolveAttribute(std::string_view name) -> const model::Attribute *
 {
 	/// @todo resolve any attributes this class supports using model::Attribute::resolve
 
