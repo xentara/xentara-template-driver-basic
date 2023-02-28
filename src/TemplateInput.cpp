@@ -86,14 +86,14 @@ auto TemplateInput::read(std::chrono::system_clock::time_point timeStamp) -> voi
 		// Get the error from the current exception using this special utility function
 		const auto error = utils::eh::currentErrorCode();
 		// Update the state
-		_state.update(timeStamp, error);
+		_state.update(timeStamp, utils::eh::unexpected(error));
 	}
 }
 
 auto TemplateInput::invalidateData(std::chrono::system_clock::time_point timeStamp) -> void
 {
 	// Set the state to "No Data"
-	_state.update(timeStamp, CustomError::NoData);
+	_state.update(timeStamp, utils::eh::unexpected(CustomError::NoData));
 }
 
 auto TemplateInput::dataType() const -> const data::DataType &
