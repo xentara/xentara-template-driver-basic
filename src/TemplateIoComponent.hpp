@@ -4,8 +4,7 @@
 #include "Attributes.hpp"
 #include "CustomError.hpp"
 
-#include <xentara/io/Component.hpp>
-#include <xentara/io/ComponentClass.hpp>
+#include <xentara/skill/Element.hpp>
 #include <xentara/utils/tools/Unique.hpp>
 #include <xentara/utils/core/Uuid.hpp>
 
@@ -19,7 +18,7 @@ using namespace std::literals;
 
 /// @brief A class representing a specific type of I/O component.
 /// @todo rename this class to something more descriptive
-class TemplateIoComponent final : public io::Component
+class TemplateIoComponent final : public skill::Element
 {
 private:
 	/// @brief A structure used to store the class specific attributes within an element's configuration
@@ -30,7 +29,7 @@ private:
 	
 public:
 	/// @brief The class object containing meta-information about this element type
-	class Class final : public io::ComponentClass
+	class Class final : public skill::Element::Class
 	{
 	public:
 		/// @brief Gets the global object
@@ -45,7 +44,7 @@ public:
             return _configHandle;
         }
 
-		/// @name Virtual Overrides for io::ComponentClass
+		/// @name Virtual Overrides for skill::Element::Class
 		/// @{
 
 		auto name() const -> std::string_view final
@@ -57,7 +56,7 @@ public:
 		auto uuid() const -> utils::core::Uuid final
 		{
 			/// @todo assign a unique UUID
-			return "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"_uuid;
+			return "deadbeef-dead-beef-dead-beefdeadbeef"_uuid;
 		}
 
 		/// @}
@@ -82,14 +81,15 @@ public:
 		return _handle;
 	}
 
-	/// @name Virtual Overrides for io::Component
+	/// @name Virtual Overrides for skill::Element
 	/// @{
 
-	auto createIo(const io::IoClass &ioClass, plugin::SharedFactory<io::Io> &factory) -> std::shared_ptr<io::Io> final;
+	auto createChildElement(const skill::Element::Class &elementClass, skill::ElementFactory &factory)
+		-> std::shared_ptr<skill::Element> final;
 
-	auto resolveAttribute(std::string_view name) -> const model::Attribute * final;
+	auto forEachAttribute(const model::ForEachAttributeFunction &function) const -> bool final;
 
-	auto readHandle(const model::Attribute &attribute) const noexcept -> data::ReadHandle final;
+	auto makeReadHandle(const model::Attribute &attribute) const noexcept -> std::optional<data::ReadHandle> final;
 
 	auto prepare() -> void final;
 
@@ -98,13 +98,13 @@ public:
 	/// @}
 
 protected:
-	/// @name Virtual Overrides for io::Component
+	/// @name Virtual Overrides for skill::Element
 	/// @{
 
 	auto loadConfig(const ConfigIntializer &initializer,
 		utils::json::decoder::Object &jsonObject,
 		config::Resolver &resolver,
-		const FallbackConfigHandler &fallbackHandler) -> void final;
+		const config::FallbackHandler &fallbackHandler) -> void final;
 
 	/// @}
 
