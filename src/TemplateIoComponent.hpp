@@ -57,17 +57,14 @@ public:
 
 	/// @}
 
-protected:
+private:
 	/// @name Virtual Overrides for skill::Element
 	/// @{
 
-	auto load(utils::json::decoder::Object &jsonObject,
-		config::Resolver &resolver,
-		const config::FallbackHandler &fallbackHandler) -> void final;
+	auto load(utils::json::decoder::Object &jsonObject, config::Context &context) -> void final;
 
 	/// @}
 
-private:
 	/// @brief A handle to the I/O component
 	Handle _handle;
 };
