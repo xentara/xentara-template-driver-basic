@@ -4,12 +4,12 @@
 #include "ReadState.hpp"
 #include "WriteState.hpp"
 #include "ReadTask.hpp"
-#include "SingleValueQueue.hpp"
 #include "WriteTask.hpp"
 
 #include <xentara/process/Task.hpp>
 #include <xentara/skill/DataPoint.hpp>
 #include <xentara/skill/EnableSharedFromThis.hpp>
+#include <xentara/utils/lockFree/SingleElementBuffer.hpp>
 
 #include <functional>
 #include <string_view>
@@ -91,7 +91,7 @@ private:
 	/// @todo use the correct value type
 	auto scheduleOutputValue(double value) noexcept
 	{
-		_pendingOutputValue.enqueue(value);
+		_pendingOutputValue.push(value);
 	}
 
 	/// @name Virtual Overrides for skill::DataPoint
@@ -115,7 +115,7 @@ private:
 
 	/// @brief The queue for the pending output value
 	/// @todo use the correct value type
-	SingleValueQueue<double> _pendingOutputValue;
+	utils::lockFree::SingleElementBuffer<double> _pendingOutputValue;
 
 	/// @brief The "read" task
 	ReadTask<TemplateOutput> _readTask { *this };
